@@ -1,0 +1,267 @@
+﻿/* Safari-only gate: full-screen notice that cannot be dismissed. */
+
+html[data-safari-gate="allowed"] .safari-gate,
+.safari-gate[hidden] {
+    display: none !important;
+}
+
+html.safari-gate-lock,
+html.safari-gate-lock body {
+    overflow: hidden;
+    height: 100%;
+}
+
+html.safari-gate-lock body {
+    background: #070605;
+}
+
+.safari-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: calc(24px + env(safe-area-inset-top, 0px)) 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    background: #070605;
+    color: #f4f4f4;
+    font-family: "DM Sans", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    animation: safari-gate-in 240ms ease-out both;
+}
+
+.safari-gate::before {
+    content: "";
+    position: fixed;
+    top: -30vh;
+    left: 50%;
+    width: 120vw;
+    max-width: 720px;
+    height: 80vh;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 40%, rgba(247, 147, 26, 0.16), rgba(247, 147, 26, 0) 62%);
+}
+
+@keyframes safari-gate-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.safari-gate-card {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    margin: auto 0;
+    padding: 26px 24px 22px;
+    outline: none;
+    border: 1px solid #2c2318;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #16130f 0%, #0b0b0a 100%);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(247, 147, 26, 0.07);
+}
+
+.safari-gate-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 4px 4px 0 0;
+    background: linear-gradient(90deg, #f7931a, rgba(247, 147, 26, 0) 78%);
+}
+
+.safari-gate-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.safari-gate-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(247, 147, 26, 0.45);
+    box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.08);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.safari-gate-brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.safari-gate-eyebrow {
+    color: #f7931a;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+}
+
+.safari-gate-brand-name {
+    color: #8f8a84;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.safari-gate-title {
+    margin: 24px 0 12px;
+    font-size: clamp(28px, 8.4vw, 36px);
+    font-weight: 550;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+}
+
+.safari-gate-title [data-safari-gate-title-accent] {
+    color: #b4b4b4;
+}
+
+.safari-gate-desc {
+    margin: 0;
+    color: #a09b95;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.safari-gate-steps {
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #241d16;
+}
+
+.safari-gate-steps li {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid #241d16;
+    color: #cfcac4;
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.safari-gate-step {
+    color: #f7931a;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+}
+
+.safari-gate-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.safari-gate-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 15px 20px;
+    border: 0;
+    border-radius: 3px;
+    background: #f7931a;
+    color: #0c0b0a;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 180ms ease, transform 180ms ease;
+}
+
+.safari-gate-button:hover:not(:disabled) {
+    background: #ffa044;
+    transform: translateY(-2px);
+}
+
+.safari-gate-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.safari-gate-button:focus-visible {
+    outline: 2px solid #ffb266;
+    outline-offset: 3px;
+}
+
+.safari-gate-button svg {
+    flex-shrink: 0;
+}
+
+.safari-gate-button[data-copied="true"] {
+    background: #1c1915;
+    color: #f7931a;
+    box-shadow: inset 0 0 0 1px rgba(247, 147, 26, 0.4);
+}
+
+.safari-gate-button-ghost {
+    background: transparent;
+    color: #cfcac4;
+    box-shadow: inset 0 0 0 1px #332b22;
+}
+
+.safari-gate-button-ghost:hover:not(:disabled) {
+    background: #1b1814;
+    color: #fff;
+}
+
+.safari-gate-button[hidden],
+.safari-gate-button svg[hidden] {
+    display: none !important;
+}
+
+.safari-gate-status {
+    min-height: 17px;
+    margin: 10px 0 0;
+    color: #f7931a;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.safari-gate-note {
+    margin: 6px 0 0;
+    color: #6f6a64;
+    font-size: 8px;
+    letter-spacing: 1.1px;
+    line-height: 1.8;
+    text-transform: uppercase;
+}
+
+@media (max-width: 380px) {
+    .safari-gate {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .safari-gate-card {
+        padding: 22px 18px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .safari-gate {
+        animation: none;
+    }
+
+    .safari-gate-button {
+        transition: none;
+    }
+}
